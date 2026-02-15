@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Targeting System</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    padding: 56px 64px;
+    width: 1400px;
+    margin: 0 auto;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .section { margin-bottom: 20px; }
+
+  .ph { margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 16px; }
+
+  .ph-badge {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    text-align: center;
+    line-height: 48px;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    vertical-align: middle;
+    margin-right: 16px;
+  }
+
+  .ph-label {
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    vertical-align: middle;
+  }
+
+  .quote {
+    background: #f8f7ff;
+    border-radius: 14px;
+    padding: 20px 28px;
+    margin-bottom: 24px;
+    border: 1.5px solid #e9e0ff;
+  }
+
+  .quote-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #5b21b6;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .two-col-table { width: 100%; border-collapse: separate; border-spacing: 14px 0; }
+  .two-col-table td { width: 50%; vertical-align: top; border-radius: 16px; padding: 26px 28px; }
+
+  .td-dark { background: #0f172a; }
+  .td-light { background: #fafafb; border: 1.5px solid #e5e7eb; }
+
+  .cc-header {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .cc-header-dark { color: #475569; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .cc-header-light { color: #94a3b8; border-bottom: 1px solid #e5e7eb; }
+
+  .ci { margin-bottom: 16px; padding-left: 24px; position: relative; }
+  .ci:last-child { margin-bottom: 0; }
+
+  .ci::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .ci-blue::before { background: #3b82f6; }
+  .ci-violet::before { background: #7c3aed; }
+
+  .ci-label { font-size: 15px; font-weight: 700; line-height: 1.35; }
+  .ci-desc { font-size: 12px; margin-top: 2px; line-height: 1.3; }
+
+  .ci-label-w { color: #f1f5f9; }
+  .ci-desc-w { color: #64748b; }
+  .ci-label-d { color: #0f172a; }
+  .ci-desc-d { color: #94a3b8; }
+
+  .conn { text-align: center; padding: 10px 0; }
+
+  .src-table { width: 100%; border-collapse: separate; border-spacing: 12px 0; }
+  .src-table td { vertical-align: top; border: 2px dashed #e2e8f0; border-radius: 16px; padding: 28px 16px 16px; position: relative; }
+
+  .sg-label {
+    position: absolute;
+    top: -10px;
+    left: 18px;
+    background: #fff;
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #94a3b8;
+  }
+
+  .chip-grid { width: 100%; border-collapse: separate; border-spacing: 8px; }
+  .chip-grid td { border-radius: 12px; padding: 13px 10px; text-align: center; }
+
+  .chip-dark { background: #0f172a; }
+  .chip-violet { background: #f5f3ff; border: 1.5px solid #ddd6fe; }
+  .chip-blue { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+
+  .chip-name { font-size: 14px; font-weight: 700; }
+  .chip-sub { font-size: 10px; margin-top: 3px; }
+
+  .chip-dark .chip-name { color: #fff; }
+  .chip-dark .chip-sub { color: #475569; }
+  .chip-violet .chip-name { color: #5b21b6; }
+  .chip-violet .chip-sub { color: #8b5cf6; }
+  .chip-blue .chip-name { color: #1d4ed8; }
+  .chip-blue .chip-sub { color: #60a5fa; }
+
+  .agg-wrap { text-align: center; margin-top: 20px; }
+  .agg-box {
+    display: inline-block;
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 18px 40px;
+    text-align: center;
+  }
+  .agg-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .agg-sub { font-size: 11px; color: #475569; margin-top: 3px; }
+
+  .mkt-stack { text-align: center; }
+
+  .mkt-bar {
+    border-radius: 16px;
+    padding: 20px 32px;
+    text-align: left;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .mkt-bar table { width: 100%; }
+  .mkt-bar td { vertical-align: middle; }
+
+  .mb-100 { width: 100%; background: #f8fafc; border: 2px solid #e2e8f0; }
+  .mb-mid { width: 78%; background: #eff6ff; border: 2px solid #93c5fd; }
+  .mb-sm { width: 56%; background: #ecfdf5; border: 3px solid #34d399; }
+
+  .mb-label { font-size: 18px; font-weight: 800; }
+  .mb-desc { font-size: 12px; color: #64748b; margin-top: 3px; }
+  .mb-pct { font-size: 34px; font-weight: 900; text-align: right; }
+
+  .pill {
+    display: inline-block;
+    border-radius: 24px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #0f172a;
+    color: #fff;
+    margin: 3px 2px;
+  }
+
+  .filter-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: #94a3b8; margin: 8px 0; }
+
+  .sig-table { width: 78%; margin: 0 auto; border-collapse: separate; border-spacing: 8px; }
+  .sig-table td {
+    background: #faf5ff;
+    border: 1.5px solid #e9d5ff;
+    border-radius: 12px;
+    padding: 14px 20px;
+    width: 50%;
+  }
+
+  .sig-icon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #ede9fe;
+    text-align: center;
+    line-height: 34px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #7c3aed;
+    vertical-align: middle;
+    margin-right: 14px;
+  }
+
+  .sig-text { font-size: 14px; font-weight: 600; color: #4c1d95; vertical-align: middle; }
+
+  .tier-table { width: 100%; border-collapse: separate; border-spacing: 12px 0; }
+  .tier-table td { width: 33.33%; vertical-align: top; border-radius: 18px; padding: 26px 22px; text-align: center; }
+
+  .t-green { background: #ecfdf5; border: 2px solid #86efac; }
+  .t-amber { background: #fffbeb; border: 2px solid #fcd34d; }
+  .t-gray { background: #f9fafb; border: 2px solid #e5e7eb; }
+
+  .tier-badge {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 52px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .tier-name { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .tier-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 12px; }
+
+  .tier-ex {
+    font-size: 11px;
+    font-style: italic;
+    padding: 10px 12px;
+    border-radius: 10px;
+    line-height: 1.45;
+    margin-bottom: 14px;
+  }
+
+  .tier-action { font-size: 14px; font-weight: 800; padding-top: 14px; }
+
+  .t-green .tier-name { color: #047857; }
+  .t-green .tier-ex { background: #dcfce7; color: #065f46; }
+  .t-green .tier-action { color: #059669; border-top: 2px solid #a7f3d0; }
+
+  .t-amber .tier-name { color: #92400e; }
+  .t-amber .tier-ex { background: #fef3c7; color: #78350f; }
+  .t-amber .tier-action { color: #d97706; border-top: 2px solid #fde68a; }
+
+  .t-gray .tier-name { color: #6b7280; }
+  .t-gray .tier-ex { background: #f3f4f6; color: #6b7280; }
+  .t-gray .tier-action { color: #9ca3af; border-top: 2px solid #e5e7eb; }
+
+  .pipe-table { width: 100%; border-collapse: collapse; overflow: hidden; border: 2px solid #bfdbfe; border-radius: 16px; }
+  .pipe-table td { padding: 18px 12px; text-align: center; vertical-align: middle; background: #f0f7ff; border-right: 1.5px solid #dbeafe; }
+  .pipe-table td:last-child { border-right: none; }
+
+  .ps-label { font-size: 14px; font-weight: 800; color: #1e40af; }
+  .ps-desc { font-size: 10px; color: #93c5fd; margin-top: 4px; line-height: 1.4; }
+
+  .pipe-end { background: #059669 !important; }
+  .pe-label { font-size: 18px; font-weight: 900; color: #fff; }
+  .pe-sub { font-size: 10px; color: #a7f3d0; margin-top: 4px; }
+
+  .chevron { font-size: 22px; font-weight: 900; color: #93c5fd; width: 20px; padding: 0 !important; background: #f0f7ff; }
+</style>
+</head>
+<body>
+
+<!-- PHASE 1 -->
+<div class="section">
+  <div class="ph">
+    <div class="ph-badge" style="background:#2563eb;">1</div>
+    <span class="ph-label" style="color:#2563eb;">Define ICP & Identify the Problem</span>
+  </div>
+
+  <div class="quote">
+    <div class="quote-text">"What 3-5 things must be true about a lead, that were true about your last 10 best customers, that made them an awesome fit?"</div>
+  </div>
+
+  <table class="two-col-table">
+    <tr>
+      <td class="td-dark">
+        <div class="cc-header cc-header-dark">ICP Criteria</div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Industry</div><div class="ci-desc ci-desc-w">Verticals where the pain is strongest</div></div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Headcount</div><div class="ci-desc ci-desc-w">Company size sweet spot (e.g. 50-500)</div></div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Geography</div><div class="ci-desc ci-desc-w">Markets you can service</div></div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Revenue Range</div><div class="ci-desc ci-desc-w">Can they afford your solution?</div></div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Tech Stack</div><div class="ci-desc ci-desc-w">Complementary or competing tools</div></div>
+        <div class="ci ci-blue"><div class="ci-label ci-label-w">Business Model</div><div class="ci-desc ci-desc-w">B2B, SaaS, Services, E-commerce</div></div>
+      </td>
+      <td class="td-light">
+        <div class="cc-header cc-header-light">Problem Sniffing</div>
+        <div class="ci ci-violet"><div class="ci-label ci-label-d">What pain do you actually solve?</div><div class="ci-desc ci-desc-d">Anchor every campaign to a real problem</div></div>
+        <div class="ci ci-violet"><div class="ci-label ci-label-d">Who gets fired if it's not fixed?</div><div class="ci-desc ci-desc-d">That's your buyer persona</div></div>
+        <div class="ci ci-violet"><div class="ci-label ci-label-d">What event makes the pain urgent?</div><div class="ci-desc ci-desc-d">That's your trigger event</div></div>
+        <div class="ci ci-violet"><div class="ci-label ci-label-d">What do they look like before buying?</div><div class="ci-desc ci-desc-d">That's your signal profile</div></div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="conn">
+  <svg width="14" height="28"><line x1="7" y1="0" x2="7" y2="20" stroke="#d1d5db" stroke-width="2"/><polygon points="0,20 14,20 7,28" fill="#d1d5db"/></svg>
+</div>
+
+<!-- PHASE 2 -->
+<div class="section">
+  <div class="ph">
+    <div class="ph-badge" style="background:#1e40af;">2</div>
+    <span class="ph-label" style="color:#1e40af;">Source & Build Target Account List</span>
+  </div>
+
+  <table class="src-table">
+    <tr>
+      <td style="width:38%;">
+        <div class="sg-label">B2B Databases</div>
+        <table class="chip-grid"><tr>
+          <td class="chip-dark"><div class="chip-name">LinkedIn</div><div class="chip-sub">Sales Navigator</div></td>
+          <td class="chip-dark"><div class="chip-name">Apollo</div><div class="chip-sub">Contact DB</div></td>
+        </tr><tr>
+          <td class="chip-dark"><div class="chip-name">Crunchbase</div><div class="chip-sub">Company Intel</div></td>
+          <td class="chip-dark"><div class="chip-name">Ocean.io</div><div class="chip-sub">Lookalikes</div></td>
+        </tr></table>
+      </td>
+      <td style="width:38%;">
+        <div class="sg-label">Trigger & Signal Sources</div>
+        <table class="chip-grid"><tr>
+          <td class="chip-violet"><div class="chip-name">Job Boards</div><div class="chip-sub">Hiring Intent</div></td>
+          <td class="chip-violet"><div class="chip-name">BuiltWith</div><div class="chip-sub">Tech Stack</div></td>
+        </tr><tr>
+          <td class="chip-violet"><div class="chip-name">G2 / Capterra</div><div class="chip-sub">Review Signals</div></td>
+          <td class="chip-violet"><div class="chip-name">News / PR</div><div class="chip-sub">Funding & M&A</div></td>
+        </tr></table>
+      </td>
+      <td style="width:24%;">
+        <div class="sg-label">Enrichment</div>
+        <table class="chip-grid"><tr>
+          <td class="chip-blue"><div class="chip-name">Clay</div><div class="chip-sub">Waterfall Enrich</div></td>
+        </tr><tr>
+          <td class="chip-blue"><div class="chip-name">FullEnrich</div><div class="chip-sub">Email + Phone</div></td>
+        </tr></table>
+      </td>
+    </tr>
+  </table>
+
+  <div class="agg-wrap">
+    <div style="text-align:center;padding-top:12px;">
+      <svg width="14" height="28"><line x1="7" y1="0" x2="7" y2="20" stroke="#334155" stroke-width="2"/><polygon points="0,20 14,20 7,28" fill="#334155"/></svg>
+    </div>
+    <div class="agg-box">
+      <div class="agg-title">Aggregate, Deduplicate & Normalize</div>
+      <div class="agg-sub">Merge sources &rarr; remove duplicates &rarr; standardize fields &rarr; verify emails</div>
+    </div>
+  </div>
+</div>
+
+<div class="conn">
+  <svg width="14" height="28"><line x1="7" y1="0" x2="7" y2="20" stroke="#d1d5db" stroke-width="2"/><polygon points="0,20 14,20 7,28" fill="#d1d5db"/></svg>
+</div>
+
+<!-- PHASE 3 -->
+<div class="section">
+  <div class="ph">
+    <div class="ph-badge" style="background:#7c3aed;">3</div>
+    <span class="ph-label" style="color:#7c3aed;">Market Mapping & Signal Layering</span>
+  </div>
+
+  <div class="mkt-stack">
+    <div class="mkt-bar mb-100"><table><tr><td><div class="mb-label" style="color:#334155;">Total Addressable Market</div><div class="mb-desc">All companies that could theoretically use your solution</div></td><td class="mb-pct" style="color:#94a3b8;">100%</td></tr></table></div>
+
+    <div class="filter-label">Filter by ICP</div>
+    <div style="margin-bottom:4px;">
+      <span class="pill">Industry</span>
+      <span class="pill">Headcount</span>
+      <span class="pill">Geography</span>
+      <span class="pill">Revenue</span>
+      <span class="pill">Tech Stack</span>
+      <span class="pill">Business Model</span>
+    </div>
+
+    <div class="conn" style="padding:4px 0;">
+      <svg width="14" height="20"><line x1="7" y1="0" x2="7" y2="14" stroke="#d1d5db" stroke-width="2"/><polygon points="0,14 14,14 7,20" fill="#d1d5db"/></svg>
+    </div>
+
+    <div class="mkt-bar mb-mid"><table><tr><td><div class="mb-label" style="color:#1d4ed8;">ICP-Qualified Accounts</div><div class="mb-desc">Companies matching your ideal customer profile</div></td><td class="mb-pct" style="color:#3b82f6;">20-30%</td></tr></table></div>
+
+    <div class="filter-label">Layer Trigger Events & Buying Signals</div>
+
+    <table class="sig-table">
+      <tr>
+        <td><span class="sig-icon">H</span><span class="sig-text">Hiring for roles your product solves</span></td>
+        <td><span class="sig-icon">$</span><span class="sig-text">Raised funding in last 6 months</span></td>
+      </tr>
+      <tr>
+        <td><span class="sig-icon">VP</span><span class="sig-text">New VP / CRO / CMO appointed</span></td>
+        <td><span class="sig-icon">T</span><span class="sig-text">Using competitor or complementary tech</span></td>
+      </tr>
+      <tr>
+        <td><span class="sig-icon">R</span><span class="sig-text">Bad Glassdoor reviews / churn signals</span></td>
+        <td><span class="sig-icon">E</span><span class="sig-text">Expanding to new markets or offices</span></td>
+      </tr>
+      <tr>
+        <td><span class="sig-icon">W</span><span class="sig-text">Attending industry events or webinars</span></td>
+        <td><span class="sig-icon">G</span><span class="sig-text">Headcount growing 20%+ YoY</span></td>
+      </tr>
+    </table>
+
+    <div class="conn" style="padding:4px 0;">
+      <svg width="14" height="20"><line x1="7" y1="0" x2="7" y2="14" stroke="#d1d5db" stroke-width="2"/><polygon points="0,14 14,14 7,20" fill="#d1d5db"/></svg>
+    </div>
+
+    <div class="mkt-bar mb-sm"><table><tr><td><div class="mb-label" style="color:#047857;">Active Target Accounts</div><div class="mb-desc">ICP-fit + showing trigger events right now</div></td><td class="mb-pct" style="color:#059669;">2-5%</td></tr></table></div>
+  </div>
+</div>
+
+<div class="conn">
+  <svg width="14" height="28"><line x1="7" y1="0" x2="7" y2="20" stroke="#d1d5db" stroke-width="2"/><polygon points="0,20 14,20 7,28" fill="#d1d5db"/></svg>
+</div>
+
+<!-- PHASE 4 -->
+<div class="section">
+  <div class="ph">
+    <div class="ph-badge" style="background:#059669;">4</div>
+    <span class="ph-label" style="color:#059669;">Segment & Prioritize</span>
+  </div>
+
+  <table class="tier-table">
+    <tr>
+      <td class="t-green">
+        <div class="tier-badge" style="background:#059669;">T1</div>
+        <div class="tier-name">Trigger + ICP Fit</div>
+        <div class="tier-desc">ICP match with active buying signal</div>
+        <div class="tier-ex">e.g. Hiring SDRs + using competitor tool + raised funding</div>
+        <div class="tier-action">&rarr; Priority Outreach</div>
+      </td>
+      <td class="t-amber">
+        <div class="tier-badge" style="background:#d97706;">T2</div>
+        <div class="tier-name">ICP Fit, Weak Signal</div>
+        <div class="tier-desc">Strong ICP match but no clear trigger</div>
+        <div class="tier-ex">e.g. Right industry & size, no recent event</div>
+        <div class="tier-action">&rarr; Secondary Outreach</div>
+      </td>
+      <td class="t-gray">
+        <div class="tier-badge" style="background:#9ca3af;">T3</div>
+        <div class="tier-name">Partial Fit</div>
+        <div class="tier-desc">Loose ICP or adjacent vertical</div>
+        <div class="tier-ex">e.g. Right size, different industry</div>
+        <div class="tier-action">&rarr; Monitor & Revisit</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="conn">
+  <svg width="14" height="28"><line x1="7" y1="0" x2="7" y2="20" stroke="#d1d5db" stroke-width="2"/><polygon points="0,20 14,20 7,28" fill="#d1d5db"/></svg>
+</div>
+
+<!-- PHASE 5 -->
+<div class="section">
+  <div class="ph">
+    <div class="ph-badge" style="background:#d97706;">5</div>
+    <span class="ph-label" style="color:#d97706;">Enrich, Personalize & Launch</span>
+  </div>
+
+  <table class="pipe-table">
+    <tr>
+      <td>
+        <div class="ps-label">Find Buyer</div>
+        <div class="ps-desc">Who gets fired if the<br>problem isn't solved?</div>
+      </td>
+      <td class="chevron">&rsaquo;</td>
+      <td>
+        <div class="ps-label">Enrich Contacts</div>
+        <div class="ps-desc">Waterfall: Clay &rarr;<br>Apollo &rarr; FullEnrich</div>
+      </td>
+      <td class="chevron">&rsaquo;</td>
+      <td>
+        <div class="ps-label">Verify Emails</div>
+        <div class="ps-desc">Bounce check +<br>catch-all validation</div>
+      </td>
+      <td class="chevron">&rsaquo;</td>
+      <td>
+        <div class="ps-label">AI Personalize</div>
+        <div class="ps-desc">Trigger-based snippets<br>via Clay + LLM</div>
+      </td>
+      <td class="chevron">&rsaquo;</td>
+      <td>
+        <div class="ps-label">Build Sequence</div>
+        <div class="ps-desc">Email + LinkedIn<br>multi-touch cadence</div>
+      </td>
+      <td class="pipe-end">
+        <div class="pe-label">Launch</div>
+        <div class="pe-sub">Instantly / Smartlead</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
