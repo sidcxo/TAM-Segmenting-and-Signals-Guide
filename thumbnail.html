@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+    cursor: pointer;
+  }
+  a { text-decoration: none; color: inherit; display: block; width: 100%; max-width: 800px; }
+  .card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    padding: 56px 52px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(15,23,42,0.25);
+  }
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .badge {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; color: #fff;
+  }
+  .title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    margin-bottom: 18px;
+  }
+  .desc {
+    font-size: 15px;
+    font-weight: 500;
+    color: #94a3b8;
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0 auto 36px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    transition: transform 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-1px); }
+  .cta-arrow { font-size: 20px; }
+</style>
+</head>
+<body>
+  <a href="https://sidcxo.github.io/TAM-Segmenting-and-Signals-Guide/" target="_blank">
+    <div class="card">
+      <div class="badge-row">
+        <div class="badge" style="background:#2563eb;">1</div>
+        <div class="badge" style="background:#1e40af;">2</div>
+        <div class="badge" style="background:#7c3aed;">3</div>
+        <div class="badge" style="background:#059669;">4</div>
+        <div class="badge" style="background:#d97706;">5</div>
+      </div>
+      <div class="title">TAM Mapping, Segmentation &<br>Signal-Based Targeting Guide</div>
+      <div class="desc">A plug-and-play strategy covering infrastructure, ICP definition, market mapping, signal layering, and prioritized outreach — ready to deploy into your current system.</div>
+      <div class="cta">
+        <span>Click to Open Full Guide</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </div>
+  </a>
+</body>
+</html>
